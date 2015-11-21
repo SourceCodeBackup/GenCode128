@@ -1,0 +1,31 @@
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenCode128", "GenCode128\GenCode128.csproj", "{32817BF9-E380-4467-9C7F-936F4B122BC7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenCode128Tests", "GenCode128Tests\GenCode128Tests.csproj", "{8DA9BF9D-6901-44C9-8A52-689415350740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample", "Sample\Sample.csproj", "{A0B295B3-90A1-49B7-B939-C25B8C17258D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{32817BF9-E380-4467-9C7F-936F4B122BC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32817BF9-E380-4467-9C7F-936F4B122BC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32817BF9-E380-4467-9C7F-936F4B122BC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32817BF9-E380-4467-9C7F-936F4B122BC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8DA9BF9D-6901-44C9-8A52-689415350740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8DA9BF9D-6901-44C9-8A52-689415350740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8DA9BF9D-6901-44C9-8A52-689415350740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8DA9BF9D-6901-44C9-8A52-689415350740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B295B3-90A1-49B7-B939-C25B8C17258D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B295B3-90A1-49B7-B939-C25B8C17258D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B295B3-90A1-49B7-B939-C25B8C17258D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B295B3-90A1-49B7-B939-C25B8C17258D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
