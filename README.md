@@ -2,6 +2,8 @@
 
 http://www.codeproject.com/Articles/14409/GenCode-A-Code-Barcode-Generator
 
+https://www.nuget.org/packages/GenCode128/
+
 ![GenCode128 - A Code128 Barcode Generator](Images/GenCode128.png)
 
 ## Introduction
