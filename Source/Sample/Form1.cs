@@ -33,7 +33,7 @@ namespace Sample
 
         private Button cmdPrint;
 
-        public Form1()
+        private Form1()
         {
             // Required for Windows Form Designer support
             this.InitializeComponent();
@@ -182,8 +182,8 @@ namespace Sample
         {
             try
             {
-                Image myimg = Code128Rendering.MakeBarcodeImage(this.txtInput.Text, int.Parse(this.txtWeight.Text), true);
-                this.pictBarcode.Image = myimg;
+                var myImage = Code128Rendering.MakeBarcodeImage(this.txtInput.Text, int.Parse(this.txtWeight.Text), true);
+                this.pictBarcode.Image = myImage;
             }
             catch (Exception ex)
             {
@@ -193,13 +193,13 @@ namespace Sample
 
         private void PrintDocument1PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
         {
-            using (Graphics g = e.Graphics)
+            using (var g = e.Graphics)
             {
-                using (Font fnt = new Font("Arial", 16))
+                using (var fnt = new Font("Arial", 16))
                 {
-                    string caption = string.Format("Code128 barcode weight={0}", this.txtWeight.Text);
+                    var caption = $"Code128 barcode weight={this.txtWeight.Text}";
                     g.DrawString(caption, fnt, Brushes.Black, 50, 50);
-                    caption = string.Format("message='{0}'", this.txtInput.Text);
+                    caption = $"message='{this.txtInput.Text}'";
                     g.DrawString(caption, fnt, Brushes.Black, 50, 75);
                     g.DrawImage(this.pictBarcode.Image, 50, 110);
                 }

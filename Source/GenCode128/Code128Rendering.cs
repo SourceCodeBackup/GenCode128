@@ -131,17 +131,16 @@ namespace GenCode128
         /// </summary>
         /// <param name="inputData">Message to be encoded</param>
         /// <param name="barWeight">Base thickness for bar width (1 or 2 works well)</param>
-        /// <param name="addQuietZone">Add required horiz margins (use if output is tight)</param>
+        /// <param name="addQuietZone">Add required horizontal margins (use if output is tight)</param>
         /// <returns>An Image of the Code128 barcode representing the message</returns>
         public static Image MakeBarcodeImage(string inputData, int barWeight, bool addQuietZone)
         {
             // get the Code128 codes to represent the message
-            Code128Content content = new Code128Content(inputData);
-            int[] codes = content.Codes;
+            var content = new Code128Content(inputData);
+            var codes = content.Codes;
 
-            int width, height;
-            width = (((codes.Length - 3) * 11) + 35) * barWeight;
-            height = Convert.ToInt32(System.Math.Ceiling(Convert.ToSingle(width) * .15F));
+            var width = (((codes.Length - 3) * 11) + 35) * barWeight;
+            var height = Convert.ToInt32(Math.Ceiling(Convert.ToSingle(width) * .15F));
 
             if (addQuietZone)
             {
@@ -149,41 +148,41 @@ namespace GenCode128
             }
 
             // get surface to draw on
-            Image myimg = new System.Drawing.Bitmap(width, height);
-            using (Graphics gr = Graphics.FromImage(myimg))
+            Image myImage = new Bitmap(width, height);
+            using (var gr = Graphics.FromImage(myImage))
             {
                 // set to white so we don't have to fill the spaces with white
-                gr.FillRectangle(System.Drawing.Brushes.White, 0, 0, width, height);
+                gr.FillRectangle(Brushes.White, 0, 0, width, height);
 
                 // skip quiet zone
-                int cursor = addQuietZone ? CQuietWidth * barWeight : 0;
+                var cursor = addQuietZone ? CQuietWidth * barWeight : 0;
 
-                for (int codeidx = 0; codeidx < codes.Length; codeidx++)
+                for (var codeIdx = 0; codeIdx < codes.Length; codeIdx++)
                 {
-                    int code = codes[codeidx];
+                    var code = codes[codeIdx];
 
                     // take the bars two at a time: a black and a white
-                    for (int bar = 0; bar < 8; bar += 2)
+                    for (var bar = 0; bar < 8; bar += 2)
                     {
-                        int barwidth = CPatterns[code, bar] * barWeight;
-                        int spcwidth = CPatterns[code, bar + 1] * barWeight;
+                        var barWidth = CPatterns[code, bar] * barWeight;
+                        var spcWidth = CPatterns[code, bar + 1] * barWeight;
 
                         // if width is zero, don't try to draw it
-                        if (barwidth > 0)
+                        if (barWidth > 0)
                         {
-                            gr.FillRectangle(System.Drawing.Brushes.Black, cursor, 0, barwidth, height);
+                            gr.FillRectangle(Brushes.Black, cursor, 0, barWidth, height);
                         }
 
                         // note that we never need to draw the space, since we 
                         // initialized the graphics to all white
 
                         // advance cursor beyond this pair
-                        cursor += barwidth + spcwidth;
+                        cursor += barWidth + spcWidth;
                     }
                 }
             }
 
-            return myimg;
+            return myImage;
         }
     }
 }

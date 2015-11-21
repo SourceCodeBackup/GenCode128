@@ -35,30 +35,30 @@ namespace GenCode128
         /// </summary>
         /// <param name="charAscii">The ASCII value of the character to translate</param>
         /// <param name="lookAheadAscii">The next character in sequence (or -1 if none)</param>
-        /// <param name="currCodeSet">The current codeset, that the returned codes need to follow;
+        /// <param name="currentCodeSet">The current codeset, that the returned codes need to follow;
         /// if the returned codes change that, then this value will be changed to reflect it</param>
         /// <returns>An array of integers representing the codes that need to be output to produce the 
         /// given character</returns>
-        public static int[] CodesForChar(int charAscii, int lookAheadAscii, ref CodeSet currCodeSet)
+        public static int[] CodesForChar(int charAscii, int lookAheadAscii, ref CodeSet currentCodeSet)
         {
             int[] result;
-            int shifter = -1;
+            var shifter = -1;
 
-            if (!CharCompatibleWithCodeset(charAscii, currCodeSet))
+            if (!CharCompatibleWithCodeset(charAscii, currentCodeSet))
             {
                 // if we have a lookahead character AND if the next character is ALSO not compatible
-                if ((lookAheadAscii != -1) && !CharCompatibleWithCodeset(lookAheadAscii, currCodeSet))
+                if ((lookAheadAscii != -1) && !CharCompatibleWithCodeset(lookAheadAscii, currentCodeSet))
                 {
                     // we need to switch code sets
-                    switch (currCodeSet)
+                    switch (currentCodeSet)
                     {
                         case CodeSet.CodeA:
                             shifter = CCodeB;
-                            currCodeSet = CodeSet.CodeB;
+                            currentCodeSet = CodeSet.CodeB;
                             break;
                         case CodeSet.CodeB:
                             shifter = CCodeA;
-                            currCodeSet = CodeSet.CodeA;
+                            currentCodeSet = CodeSet.CodeA;
                             break;
                     }
                 }
@@ -97,7 +97,7 @@ namespace GenCode128
             }
             else
             {
-                return (charAscii < 32) ? CodeSetAllowed.CodeA : CodeSetAllowed.CodeB;
+                return charAscii < 32 ? CodeSetAllowed.CodeA : CodeSetAllowed.CodeB;
             }
         }
 
@@ -105,13 +105,13 @@ namespace GenCode128
         /// Determine if a character can be represented in a given codeset
         /// </summary>
         /// <param name="charAscii">character to check for</param>
-        /// <param name="currcs">codeset context to test</param>
+        /// <param name="currentCodeSet">codeset context to test</param>
         /// <returns>true if the codeset contains a representation for the ASCII character</returns>
-        public static bool CharCompatibleWithCodeset(int charAscii, CodeSet currcs)
+        public static bool CharCompatibleWithCodeset(int charAscii, CodeSet currentCodeSet)
         {
-            CodeSetAllowed csa = CodesetAllowedForChar(charAscii);
-            return csa == CodeSetAllowed.CodeAorB || (csa == CodeSetAllowed.CodeA && currcs == CodeSet.CodeA)
-                   || (csa == CodeSetAllowed.CodeB && currcs == CodeSet.CodeB);
+            var csa = CodesetAllowedForChar(charAscii);
+            return csa == CodeSetAllowed.CodeAorB || (csa == CodeSetAllowed.CodeA && currentCodeSet == CodeSet.CodeA)
+                   || (csa == CodeSetAllowed.CodeB && currentCodeSet == CodeSet.CodeB);
         }
 
         /// <summary>
@@ -121,7 +121,7 @@ namespace GenCode128
         /// <returns>code128 symbol value for the character</returns>
         public static int CodeValueForChar(int charAscii)
         {
-            return (charAscii >= 32) ? charAscii - 32 : charAscii + 64;
+            return charAscii >= 32 ? charAscii - 32 : charAscii + 64;
         }
 
         /// <summary>

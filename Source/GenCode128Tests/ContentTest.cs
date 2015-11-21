@@ -36,309 +36,305 @@ namespace GenCode128Tests
         [Test]
         public void CharTranslationTests()
         {
-            CodeSet currcs, origcs;
-            int thischar, nextchar;
-            int[] resultcodes;
-
             // in CodeA, thischar Either, nextchar Either
-            thischar = 66; // "B"
-            nextchar = 66;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            var thischar = 66;
+            var nextchar = 66;
+            var currentCodeSet = CodeSet.CodeA;
+            var origcs = currentCodeSet;
+            var resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeA, nextchar Either
             thischar = 1; // "^A"
             nextchar = 66;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(65, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeB, nextchar Either
             thischar = 110; // "n"
             nextchar = 66;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CShift, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(78, resultcodes[1], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar Either, nextchar -1
             thischar = 66; // "B"
             nextchar = -1;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeA, nextchar -1
             thischar = 1; // "^A"
             nextchar = -1;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(65, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeB, nextchar -1
             thischar = 110; // "n"
             nextchar = -1;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CShift, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(78, resultcodes[1], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar Either, nextchar CodeA
             thischar = 66; // "B"
             nextchar = 1;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeA, nextchar CodeA
             thischar = 1; // "^A"
             nextchar = 1;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(65, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeB, nextchar CodeA
             thischar = 110; // "n"
             nextchar = 1;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CShift, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(78, resultcodes[1], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
             
             // in CodeA, thischar Either, nextchar CodeB
             thischar = 66; // "B"
             nextchar = 110;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeA, nextchar CodeB
             thischar = 1; // "^A"
             nextchar = 110;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(65, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeA, thischar CodeB, nextchar CodeB
             thischar = 110; // "n"
             nextchar = 110;
-            currcs = CodeSet.CodeA;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeA;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CCodeB, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(78, resultcodes[1], "Incorrect code returned");
-            Assert.AreNotEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreNotEqual(origcs, currentCodeSet, "Incorrect code set returned");
             
             // in CodeB, thischar Either, nextchar Either
             thischar = 66; // "B"
             nextchar = 66;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeA, nextchar Either
             thischar = 1; // "^A"
             nextchar = 66;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CShift, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(65, resultcodes[1], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeB, nextchar Either
             thischar = 110; // "n"
             nextchar = 66;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(78, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
             
             // in CodeB, thischar Either, nextchar -1
             thischar = 66; // "B"
             nextchar = -1;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeA, nextchar -1
             thischar = 1; // "^A"
             nextchar = -1;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CShift, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(65, resultcodes[1], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeB, nextchar -1
             thischar = 110; // "n"
             nextchar = -1;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(78, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
             
             // in CodeB, thischar Either, nextchar CodeA
             thischar = 66; // "B"
             nextchar = 1;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeA, nextchar CodeA
             thischar = 1; // "^A"
             nextchar = 1;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CCodeA, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(65, resultcodes[1], "Incorrect code returned");
-            Assert.AreNotEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreNotEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeB, nextchar CodeA
             thischar = 110; // "n"
             nextchar = 1;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(78, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
             
             // in CodeB, thischar Either, nextchar CodeB
             thischar = 66; // "B"
             nextchar = 110;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(34, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeA, nextchar CodeB
             thischar = 1; // "^A"
             nextchar = 110;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(2, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(CShift, resultcodes[0], "Incorrect code returned");
             Assert.AreEqual(65, resultcodes[1], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
 
             // in CodeB, thischar CodeB, nextchar CodeB
             thischar = 110; // "n"
             nextchar = 110;
-            currcs = CodeSet.CodeB;
-            origcs = currcs;
-            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currcs);
+            currentCodeSet = CodeSet.CodeB;
+            origcs = currentCodeSet;
+            resultcodes = Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet);
             Assert.IsNotNull(resultcodes, "No codes returned");
             Assert.AreEqual(1, resultcodes.Length, "Incorrect number of codes returned");
             Assert.AreEqual(78, resultcodes[0], "Incorrect code returned");
-            Assert.AreEqual(origcs, currcs, "Incorrect code set returned");
+            Assert.AreEqual(origcs, currentCodeSet, "Incorrect code set returned");
         }
 
         [Test]
         public void CharCompatibilityTests()
         {
             var thischar = 66;
-            var currcs = CodeSet.CodeA;
-            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currcs), "Compat test failed");
+            var currentCodeSet = CodeSet.CodeA;
+            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currentCodeSet), "Compat test failed");
 
             thischar = 66; // "B"
-            currcs = CodeSet.CodeB;
-            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currcs), "Compat test failed");
+            currentCodeSet = CodeSet.CodeB;
+            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currentCodeSet), "Compat test failed");
 
             thischar = 17; // "^Q"
-            currcs = CodeSet.CodeA;
-            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currcs), "Compat test failed");
+            currentCodeSet = CodeSet.CodeA;
+            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currentCodeSet), "Compat test failed");
 
             thischar = 17; // "^Q"
-            currcs = CodeSet.CodeB;
-            Assert.AreEqual(false, Code128Code.CharCompatibleWithCodeset(thischar, currcs), "Compat test failed");
+            currentCodeSet = CodeSet.CodeB;
+            Assert.AreEqual(false, Code128Code.CharCompatibleWithCodeset(thischar, currentCodeSet), "Compat test failed");
 
             thischar = 110; // "n"
-            currcs = CodeSet.CodeA;
-            Assert.AreEqual(false, Code128Code.CharCompatibleWithCodeset(thischar, currcs), "Compat test failed");
+            currentCodeSet = CodeSet.CodeA;
+            Assert.AreEqual(false, Code128Code.CharCompatibleWithCodeset(thischar, currentCodeSet), "Compat test failed");
 
             thischar = 110; // "n"
-            currcs = CodeSet.CodeB;
-            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currcs), "Compat test failed");
+            currentCodeSet = CodeSet.CodeB;
+            Assert.AreEqual(true, Code128Code.CharCompatibleWithCodeset(thischar, currentCodeSet), "Compat test failed");
         }
 
         [Test]
@@ -356,8 +352,8 @@ namespace GenCode128Tests
         [Test]
         public void FullStringTest()
         {
-            Code128Content content = new Code128Content("BarCode 1");
-            int[] result = content.Codes;
+            var content = new Code128Content("BarCode 1");
+            var result = content.Codes;
             Assert.AreEqual(12, result.Length, "Wrong number of code values in result");
             Assert.AreEqual(104, result[0], "Start code wrong");
             Assert.AreEqual(34, result[1], "Code value #1 wrong");

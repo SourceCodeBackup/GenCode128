@@ -1,5 +1,6 @@
 namespace GenCode128
 {
+    using System.Collections;
     using System.Text;
 
     /// <summary>
@@ -7,27 +8,19 @@ namespace GenCode128
     /// </summary>
     public class Code128Content
     {
-        private readonly int[] codeList;
-
         /// <summary>
         /// Create content based on a string of ASCII data
         /// </summary>
         /// <param name="asciiData">the string that should be represented</param>
         public Code128Content(string asciiData)
         {
-            this.codeList = this.StringToCode128(asciiData);
+            this.Codes = this.StringToCode128(asciiData);
         }
 
         /// <summary>
         /// Provides the Code128 code values representing the object's string
         /// </summary>
-        public int[] Codes
-        {
-            get
-            {
-                return this.codeList;
-            }
-        }
+        public int[] Codes { get; }
 
         /// <summary>
         /// Transform the string into integers representing the Code128 codes
@@ -38,35 +31,33 @@ namespace GenCode128
         private int[] StringToCode128(string asciiData)
         {
             // turn the string into ascii byte data
-            byte[] asciiBytes = Encoding.ASCII.GetBytes(asciiData);
+            var asciiBytes = Encoding.ASCII.GetBytes(asciiData);
 
             // decide which codeset to start with
-            Code128Code.CodeSetAllowed csa1 = asciiBytes.Length > 0
-                                                  ? Code128Code.CodesetAllowedForChar(asciiBytes[0])
-                                                  : Code128Code.CodeSetAllowed.CodeAorB;
-            Code128Code.CodeSetAllowed csa2 = asciiBytes.Length > 0
-                                                  ? Code128Code.CodesetAllowedForChar(asciiBytes[1])
-                                                  : Code128Code.CodeSetAllowed.CodeAorB;
-            CodeSet currcs = this.GetBestStartSet(csa1, csa2);
+            var csa1 = asciiBytes.Length > 0
+                           ? Code128Code.CodesetAllowedForChar(asciiBytes[0])
+                           : Code128Code.CodeSetAllowed.CodeAorB;
+            var csa2 = asciiBytes.Length > 0
+                           ? Code128Code.CodesetAllowedForChar(asciiBytes[1])
+                           : Code128Code.CodeSetAllowed.CodeAorB;
+            var currentCodeSet = this.GetBestStartSet(csa1, csa2);
 
             // set up the beginning of the barcode
-            System.Collections.ArrayList codes = new System.Collections.ArrayList(asciiBytes.Length + 3);
-            
             // assume no codeset changes, account for start, checksum, and stop
-            codes.Add(Code128Code.StartCodeForCodeSet(currcs));
-
+            var codes = new ArrayList(asciiBytes.Length + 3) { Code128Code.StartCodeForCodeSet(currentCodeSet) };
+            
             // add the codes for each character in the string
-            for (int i = 0; i < asciiBytes.Length; i++)
+            for (var i = 0; i < asciiBytes.Length; i++)
             {
                 int thischar = asciiBytes[i];
-                int nextchar = asciiBytes.Length > (i + 1) ? asciiBytes[i + 1] : -1;
+                var nextchar = asciiBytes.Length > i + 1 ? asciiBytes[i + 1] : -1;
 
-                codes.AddRange(Code128Code.CodesForChar(thischar, nextchar, ref currcs));
+                codes.AddRange(Code128Code.CodesForChar(thischar, nextchar, ref currentCodeSet));
             }
 
             // calculate the check digit
-            int checksum = (int)codes[0];
-            for (int i = 1; i < codes.Count; i++)
+            var checksum = (int)codes[0];
+            for (var i = 1; i < codes.Count; i++)
             {
                 checksum += i * (int)codes[i];
             }
@@ -75,7 +66,7 @@ namespace GenCode128
 
             codes.Add(Code128Code.StopCode());
 
-            int[] result = codes.ToArray(typeof(int)) as int[];
+            var result = codes.ToArray(typeof(int)) as int[];
             return result;
         }
 
@@ -88,14 +79,14 @@ namespace GenCode128
         /// <returns>The codeset determined to be best to start with</returns>
         private CodeSet GetBestStartSet(Code128Code.CodeSetAllowed csa1, Code128Code.CodeSetAllowed csa2)
         {
-            int vote = 0;
+            var vote = 0;
 
-            vote += (csa1 == Code128Code.CodeSetAllowed.CodeA) ? 1 : 0;
-            vote += (csa1 == Code128Code.CodeSetAllowed.CodeB) ? -1 : 0;
-            vote += (csa2 == Code128Code.CodeSetAllowed.CodeA) ? 1 : 0;
-            vote += (csa2 == Code128Code.CodeSetAllowed.CodeB) ? -1 : 0;
+            vote += csa1 == Code128Code.CodeSetAllowed.CodeA ? 1 : 0;
+            vote += csa1 == Code128Code.CodeSetAllowed.CodeB ? -1 : 0;
+            vote += csa2 == Code128Code.CodeSetAllowed.CodeA ? 1 : 0;
+            vote += csa2 == Code128Code.CodeSetAllowed.CodeB ? -1 : 0;
 
-            return (vote > 0) ? CodeSet.CodeA : CodeSet.CodeB; // ties go to codeB due to my own prejudices
+            return vote > 0 ? CodeSet.CodeA : CodeSet.CodeB; // ties go to codeB due to my own prejudices
         }
     }
 }
