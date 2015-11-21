@@ -2,6 +2,8 @@
 
 http://www.codeproject.com/Articles/14409/GenCode-A-Code-Barcode-Generator
 
+![GenCode128 - A Code128 Barcode Generator](Images/GenCode128.png)
+
 ## Introduction
 
 This is a simple library that lets you do one thing very easily: generate an Image for a Code128 barcode, with a single line of code. This image is suitable for print or display in a WinForms application, or even in ASP.NET.
