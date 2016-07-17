@@ -15,6 +15,9 @@ namespace GenCode128
         // however, the last one -- STOP -- has 7. The cost of the
         // extra integers is trivial, and this lets the code flow
         // much more elegantly
+        // The code representes 1s and 0s, that always change and,
+        // this way, we can representa all with 6 elements.
+        // Reference: http://www.barcodeisland.com/code128.phtml
         private static readonly int[,] CPatterns =
                                                     {
                                                      { 2, 1, 2, 2, 2, 2, 0, 0 }, // 0
