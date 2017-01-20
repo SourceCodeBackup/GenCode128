@@ -37,7 +37,7 @@ namespace GenCode128
             var csa1 = asciiBytes.Length > 0
                            ? Code128Code.CodesetAllowedForChar(asciiBytes[0])
                            : Code128Code.CodeSetAllowed.CodeAorB;
-            var csa2 = asciiBytes.Length > 0
+            var csa2 = asciiBytes.Length > 1
                            ? Code128Code.CodesetAllowedForChar(asciiBytes[1])
                            : Code128Code.CodeSetAllowed.CodeAorB;
             var currentCodeSet = this.GetBestStartSet(csa1, csa2);
