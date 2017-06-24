@@ -372,5 +372,17 @@ namespace GenCode128Tests
             result = content.Codes;
             Assert.AreEqual(10, result.Length, "Wrong number of code values in result");
         }
+
+        [Test]
+        public void OneCharStringTest()
+        {
+            var content = new Code128Content("0");
+            var result = content.Codes;
+            Assert.AreEqual(4, result.Length, "Wrong number of code values in result");
+            Assert.AreEqual(104, result[0], "Start code wrong");
+            Assert.AreEqual(16, result[1], "Code value #1 wrong");
+            Assert.AreEqual(17, result[2], "Checksum wrong");
+            Assert.AreEqual(106, result[3], "Stop character wrong");
+        }
     }
 }

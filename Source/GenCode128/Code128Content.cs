@@ -40,6 +40,7 @@ namespace GenCode128
             Code128Code.CodeSetAllowed[] csa = new Code128Code.CodeSetAllowed[4];
 
             // decide which codeset to start with
+
             csa[0] = asciiBytes.Length > 0
                                         ? Code128Code.CodesetAllowedForChar(asciiBytes[0])
                                         : Code128Code.CodeSetAllowed.CodeAorBorC;
