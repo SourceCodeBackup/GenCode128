@@ -2,6 +2,18 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Version>2.0.0</Version>
+    <Product>GenCode128 - A Code128 Barcode Generator</Product>
+    <Authors>Nikolay.IT, Chris Wuestefeld</Authors>
+    <Description>This is a simple library that lets you do one thing very easily: generate an Image for a Code128 barcode, with a single line of code. This image is suitable for print or display in a WPF, WinForms and ASP.NET applications.</Description>
+    <PackageReleaseNotes>Target .NET Standard 2.0</PackageReleaseNotes>
+    <PackageTags>Barcode, GenCode128, Code128, generate barcode</PackageTags>
+    <RepositoryUrl>https://github.com/SourceCodeBackup/GenCode128</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/SourceCodeBackup/GenCode128</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <Copyright>Nikolay.IT, Chris Wuestefeld</Copyright>
+    <PackageId>GenCode128</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
